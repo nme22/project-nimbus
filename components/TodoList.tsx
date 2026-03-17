@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useUser } from '@clerk/nextjs';
 import { getSupabase } from '@/lib/supabase';
 import type { Todo, TodoInsert, TodoUpdate, TodoCategory, TodoStatus } from '@/types/todo';
 import CategoryFilter from './CategoryFilter';
@@ -9,6 +10,7 @@ import TodoCard from './TodoCard';
 import EmptyState from './EmptyState';
 
 export default function TodoList() {
+  const { user } = useUser();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState<TodoCategory | 'all'>('all');
   const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
@@ -16,8 +18,10 @@ export default function TodoList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    if (user) {
+      fetchTodos();
+    }
+  }, [user]);
 
   async function fetchTodos() {
     const { data, error } = await getSupabase()
@@ -35,7 +39,7 @@ export default function TodoList() {
   }
 
   async function addTodo(data: TodoInsert | TodoUpdate) {
-    const insert = data as TodoInsert;
+    const insert = { ...data } as TodoInsert;
     const { data: newTodo, error } = await getSupabase()
       .from('todos')
       .insert(insert)

@@ -24,6 +24,7 @@ export interface Todo {
 }
 
 export interface TodoInsert {
+  user_id?: string;
   title: string;
   description?: string | null;
   estimated_cost?: number | null;
