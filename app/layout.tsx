@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -15,7 +15,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Project Nimbus — Household Projects",
-  description: "A Flying Nimbus-themed todo list for household projects",
+  description: "Plan household projects, track tasks, and build Home Depot and Lowe's shopping lists",
+  appleWebApp: {
+    capable: true,
+    title: "Nimbus",
+    statusBarStyle: "default",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#FFF8F0",
 };
 
 export default function RootLayout({

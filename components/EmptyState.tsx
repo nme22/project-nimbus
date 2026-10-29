@@ -1,7 +1,9 @@
-export default function EmptyState() {
+import { primaryButtonClass } from '@/components/ui/primitives';
+
+export default function EmptyState({ onCreate }: { onCreate?: () => void }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
-      <svg width="120" height="80" viewBox="0 0 120 80" fill="none" className="mb-6 opacity-60">
+      <svg width="120" height="80" viewBox="0 0 120 80" fill="none" className="mb-6 opacity-60" aria-hidden="true">
         <ellipse cx="60" cy="50" rx="50" ry="20" fill="#FCEABB" />
         <ellipse cx="40" cy="45" rx="25" ry="15" fill="#FFF3E0" />
         <ellipse cx="80" cy="45" rx="25" ry="15" fill="#FFF3E0" />
@@ -11,8 +13,13 @@ export default function EmptyState() {
       </svg>
       <h3 className="text-xl font-semibold text-foreground/70 mb-2">No projects yet</h3>
       <p className="text-foreground/50 max-w-sm">
-        Your Flying Nimbus is waiting! Add your first household project to get started.
+        Your Flying Nimbus is waiting! Add your first household project, or start from a template.
       </p>
+      {onCreate && (
+        <button onClick={onCreate} className={`${primaryButtonClass} mt-6`}>
+          + New project
+        </button>
+      )}
     </div>
   );
 }

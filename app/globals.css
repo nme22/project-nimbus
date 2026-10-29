@@ -18,6 +18,9 @@
   --priority-low: #22C55E;
   --priority-medium: #F5A623;
   --priority-high: #E8752A;
+
+  --home-depot: #F96302;
+  --lowes: #004990;
 }
 
 @theme inline {
@@ -36,6 +39,9 @@
   --color-priority-low: var(--priority-low);
   --color-priority-medium: var(--priority-medium);
   --color-priority-high: var(--priority-high);
+  --color-home-depot: var(--home-depot);
+  --color-lowes: var(--lowes);
+  --shadow-cloud: 0 4px 20px rgba(245, 166, 35, 0.15);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -44,4 +50,34 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Keep fixed bars clear of the iPhone home indicator / notch. */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@keyframes sheet-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-sheet-up {
+  animation: sheet-up 0.22s ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.15s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sheet-up,
+  .animate-fade-in {
+    animation: none;
+  }
 }
