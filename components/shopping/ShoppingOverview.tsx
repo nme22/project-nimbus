@@ -140,6 +140,7 @@ export default function ShoppingOverview() {
                     key={item.id}
                     item={item}
                     context={groupBy === 'store' ? item.project?.title : null}
+                    showStore={groupBy === 'project'}
                     onTogglePurchased={() => togglePurchased(item)}
                     onEdit={() => setEditing(item)}
                   />

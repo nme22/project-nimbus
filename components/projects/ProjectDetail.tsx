@@ -335,6 +335,7 @@ export default function ProjectDetail({ id }: { id: string }) {
                   <ShoppingItemRow
                     key={item.id}
                     item={item}
+                    showStore
                     context={taskTitle(item.task_id)}
                     onTogglePurchased={() => togglePurchased(item)}
                     onEdit={() => setSheet({ kind: 'edit-item', item })}

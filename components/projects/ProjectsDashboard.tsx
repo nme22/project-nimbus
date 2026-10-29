@@ -103,9 +103,11 @@ export default function ProjectsDashboard() {
           <h1 className="text-2xl sm:text-3xl font-bold">Projects</h1>
           <p className="text-sm text-foreground/60">Your household projects, riding on a cloud</p>
         </div>
-        <button onClick={() => setIsAdding(true)} className={`${primaryButtonClass} hidden sm:inline-flex`}>
-          + New project
-        </button>
+        <div className="hidden sm:block">
+          <button onClick={() => setIsAdding(true)} className={primaryButtonClass}>
+            + New project
+          </button>
+        </div>
       </div>
 
       <ErrorBanner message={error} onDismiss={() => setError(null)} />

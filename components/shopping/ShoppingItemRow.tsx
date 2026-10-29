@@ -10,9 +10,11 @@ interface ShoppingItemRowProps {
   onEdit: () => void;
   /** Look up a store product for an item that has no link yet. */
   onFind?: () => void;
+  /** Show the store badge; off when the list is already grouped by store. */
+  showStore?: boolean;
 }
 
-export default function ShoppingItemRow({ item, context, onTogglePurchased, onEdit, onFind }: ShoppingItemRowProps) {
+export default function ShoppingItemRow({ item, context, onTogglePurchased, onEdit, onFind, showStore }: ShoppingItemRowProps) {
   const needsProduct = !item.url;
 
   return (
@@ -31,7 +33,7 @@ export default function ShoppingItemRow({ item, context, onTogglePurchased, onEd
           {item.name}
         </span>
         <span className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-foreground/50">
-          {item.store !== 'other' && <StoreBadge store={item.store} />}
+          {showStore && item.store !== 'other' && <StoreBadge store={item.store} />}
           {context && <span className="truncate">{context}</span>}
           {item.unit_price != null && item.quantity > 1 && (
             <span>
